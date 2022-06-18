@@ -27,7 +27,7 @@ export default class MyHelloWorld {
 		// set up somewhere to store loaded assets (meshes, textures, animations, gltfs, etc.)
 		this.assets = new MRE.AssetContainer(this.context);
 
-		if(this.kitObject !== null){
+		if(this.kitObject != null){
 			this.kitObject.destroy();
 		}
 
