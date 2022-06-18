@@ -47,7 +47,7 @@ export default class MyHelloWorld {
 		
 		
 		this.i = this.i + 1;
-		if (this.i === this.kitObjectIds.length){
+		if (this.i == this.kitObjectIds.length){
 			this.i = 0;
 		}
 		setTimeout(this.started.bind(this), 10000, this.i);
