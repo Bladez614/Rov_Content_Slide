@@ -21,15 +21,12 @@ export default class MyHelloWorld {
 
 	constructor(private context: MRE.Context) {
 		this.context.onStarted(() => this.started(this.i));
+		setInterval(this.timerFunction.bind(this), 10000, this);
 	}
 	
 	private started(position: number) {
 		// set up somewhere to store loaded assets (meshes, textures, animations, gltfs, etc.)
 		this.assets = new MRE.AssetContainer(this.context);
-
-		if(this.kitObject !== null){
-			this.kitObject.destroy();
-		}
 
 		this.kitObject = MRE.Actor.CreateFromLibrary(this.context,{
 			resourceId: 'artifact:' + this.kitObjectIds[position],
@@ -44,12 +41,13 @@ export default class MyHelloWorld {
 		})
 
 		this.kitObject.appearance.enabled = true;
-		
-		
-		this.i = this.i + 1;
-		if (this.i === this.kitObjectIds.length){
-			this.i = 0;
+	}
+	timerFunction(that: any){
+		that.kitObject.destroy();
+		that.i = that.i + 1;
+		if (that.i === that.kitObjectIds.length){
+			that.i = 0;
 		}
-		setTimeout(this.started.bind(this), 10000, this.i);
+		that.started(that.i);
 	}
 }
